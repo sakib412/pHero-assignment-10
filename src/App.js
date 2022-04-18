@@ -10,6 +10,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Footer from './components/Footer/Footer';
 import Checkout from './components/Checkout/Checkout.comp';
 import NotFound from './components/NotFound/NotFound.comp';
+import Blogs from './components/Blogs/Blogs.comp';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Checkout />
             </PrivateRoute>
           } />
+          <Route path='/blogs' element={<Blogs />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='*' element={<NotFound />} />
