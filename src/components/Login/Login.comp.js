@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import './Login.css'
 
 const Login = () => {
     const navigate = useNavigate()
@@ -19,13 +20,27 @@ const Login = () => {
         signInWithEmailAndPassword(email, password)
     }
 
-    if (user) {
+    if (user || userFromGoogle) {
         navigate('/')
+    }
+
+    if (error || errorFromGoogle) {
+        console.log(error.message)
     }
 
     return (
         <div>
             <h2 className='mt-5 text-center'>Login</h2>
+            <div className='social-login'>
+                <img
+                    onClick={() => signInWithGoogle()}
+                    alt='google-singin-button'
+                    src='/img/google.png'
+                    className='img-fluid' />
+            </div>
+            <p className="separator">
+                Or
+            </p>
             <div className='row'>
                 <form className='col-12 col-md-8 col-lg-6 mx-auto' onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-3">

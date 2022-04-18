@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
+import { Link, useNavigate } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth'
 import auth from '../../firebase.init';
+
 const Register = () => {
+    const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [
         createUserWithEmailAndPassword,
@@ -13,15 +16,29 @@ const Register = () => {
     ] = useCreateUserWithEmailAndPassword(auth, {
         sendEmailVerification: true
     });
+    const [signInWithGoogle, userFromGoogle, loadingFromGoogle, errorFromGoogle] = useSignInWithGoogle(auth);
 
     const onSubmit = ({ email, password }) => {
         createUserWithEmailAndPassword(email, password)
     }
-    console.log(error)
+
+    if (user || userFromGoogle) {
+        navigate('/')
+    }
 
     return (
         <div>
             <h2 className='mt-5 text-center'>Register</h2>
+            <div className='social-login'>
+                <img
+                    onClick={() => signInWithGoogle()}
+                    alt='google-singin-button'
+                    src='/img/google.png'
+                    className='img-fluid' />
+            </div>
+            <p className="separator">
+                Or
+            </p>
             <div className='row'>
                 <form className='col-12 col-md-8 col-lg-6 mx-auto' onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-3">

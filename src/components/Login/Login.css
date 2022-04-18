@@ -1,0 +1,9 @@
+.social-login {
+    display: flex;
+    justify-content: center;
+}
+
+.social-login img {
+    width: 15rem;
+    cursor: pointer;
+}
