@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth'
 import auth from '../../firebase.init';
 import { toast } from 'react-toastify';
@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 const Register = () => {
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const location = useLocation()
+    let from = location.state?.from?.pathname || "/";
     const [
         createUserWithEmailAndPassword,
         user,
@@ -24,11 +26,10 @@ const Register = () => {
     }
 
     if (user || userFromGoogle) {
-        navigate('/')
+        navigate(from, { replace: true })
     }
 
     if (error || errorFromGoogle) {
-        console.log(error?.message, errorFromGoogle?.message)
         toast(error?.message)
     }
 
