@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth'
 import auth from '../../firebase.init';
+import { toast } from 'react-toastify';
 
 const Register = () => {
     const navigate = useNavigate()
@@ -24,6 +25,11 @@ const Register = () => {
 
     if (user || userFromGoogle) {
         navigate('/')
+    }
+
+    if (error || errorFromGoogle) {
+        console.log(error?.message, errorFromGoogle?.message)
+        toast(error?.message)
     }
 
     return (

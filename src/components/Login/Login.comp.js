@@ -1,13 +1,16 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import './Login.css'
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const location = useLocation()
+    let from = location.state?.from?.pathname || "/";
     const [
         signInWithEmailAndPassword,
         user,
@@ -21,11 +24,12 @@ const Login = () => {
     }
 
     if (user || userFromGoogle) {
-        navigate('/')
+        navigate(from, { replace: true })
     }
 
     if (error || errorFromGoogle) {
-        console.log(error.message)
+        console.log(error?.message, errorFromGoogle?.message)
+        toast(error?.message)
     }
 
     return (

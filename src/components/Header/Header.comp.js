@@ -11,6 +11,9 @@ const Header = () => {
         signOut(auth)
         navigate('/login')
     }
+    if (error) {
+        console.log(error.message)
+    }
 
     return (
         <header>
