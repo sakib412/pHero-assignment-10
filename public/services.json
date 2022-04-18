@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "services": "simple Photograph",
+    "price": "2000",
+    "discription": "Capture simple animal photo ",
+    "imgUrl": "https://images.unsplash.com/photo-1511617789198-7618974100b4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fHdpbGQlMjBhbmltYWx8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": 2,
+    "services": "Moment Photo",
+    "price": "5000",
+    "discription": "Capture a dynamic moment photo",
+    "imgUrl": "https://images.unsplash.com/photo-1526034332220-067b0f400e06?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHdpbGQlMjBhbmltYWx8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": 3,
+    "services": "Relation in nature",
+    "price": "3500",
+    "discription": "Capture the Relationship in animal .",
+    "imgUrl": "https://images.unsplash.com/photo-1598755257428-e7533d2f8771?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHdpbGQlMjBhbmltYWx8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60"
+  }
+]
