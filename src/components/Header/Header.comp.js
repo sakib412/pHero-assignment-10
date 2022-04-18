@@ -1,9 +1,16 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import { signOut } from 'firebase/auth';
 const Header = () => {
+    const navigate = useNavigate()
     const [user, loading, error] = useAuthState(auth);
+
+    const onLogout = () => {
+        signOut(auth)
+        navigate('/login')
+    }
 
     return (
         <header>
@@ -18,12 +25,20 @@ const Header = () => {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/">Home</NavLink>
                             </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/login">Login</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/register">Register</NavLink>
-                            </li>
+                            {user ? (
+                                <li className="nav-item">
+                                    <span role='button' className="nav-link" onClick={onLogout}>Logout</span>
+                                </li>
+                            ) : (
+                                <>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link" to="/login">Login</NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link" to="/register">Register</NavLink>
+                                    </li>
+                                </>
+                            )}
                         </ul>
                     </div>
                 </div>

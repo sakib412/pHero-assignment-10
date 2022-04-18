@@ -1,12 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const Login = () => {
+    const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = (data) => {
-        console.log(data)
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
+    const [signInWithGoogle, userFromGoogle, loadingFromGoogle, errorFromGoogle] = useSignInWithGoogle(auth);
+
+    const onSubmit = ({ email, password }) => {
+        signInWithEmailAndPassword(email, password)
     }
+
+    if (user) {
+        navigate('/')
+    }
+
     return (
         <div>
             <h2 className='mt-5 text-center'>Login</h2>
@@ -42,8 +58,10 @@ const Login = () => {
                             {errors?.password?.message}
                         </div>
                     </div>
-                    <p>Don't have an account? <Link to="/register">Register here</Link></p>
+                    <p>Forgot your password? <Link to="/reset-password">Reset here</Link></p>
+
                     <button type="submit" className="btn btn-primary">Login</button>
+                    <span className='ms-3'>Don't have an account? <Link to="/register">Register here</Link></span>
                 </form>
             </div>
         </div>
